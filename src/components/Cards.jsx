@@ -15,9 +15,19 @@ const Cards = ({admin}) => {
                         data-bs-target="#modalEdicao"
                         onClick={
                             () => {
-                                setObjeto({id: 0, title: '', description: '', priority: '', class: '', creationDate: '', endDate: ''});
+                                setObjeto({
+                                    id: 0,
+                                    title: '',
+                                    description: '',
+                                    priority: '',
+                                    class: '',
+                                    creationDate: '',
+                                    endDate: ''});
                                 setEditar(false);
-                                setAlerta({status: '', message: ''});
+                                setAlerta({
+                                    status: '',
+                                    message: ''
+                                });
                             }
                         }>
                         Adicionar <i className="bi bi-file-earmark-plus"/>
@@ -33,6 +43,9 @@ const Cards = ({admin}) => {
                             <div className={`card shadow border-2 rounded-3 border-${objeto.class}`}>
                                 <div className={`card-header text-center bg-${objeto.class}`}>
                                     <span className="badge bg-white text-dark">{objeto.id}</span>
+                                    { isLate(objeto.endDate) &&
+                                        <span className="badge bg-danger ms-2">Atrasada</span>
+                                    }
                                 </div>
                                 <div className="card-body">
                                     <h5 className="card-title fw-bold">{objeto.title}</h5>
@@ -40,8 +53,12 @@ const Cards = ({admin}) => {
                                 </div>
 
                                 <ul className="list-group border-light list-group-flush">
-                                    <li className="list-group-item text-muted sm-text border-light"><i className="bi bi-calendar-plus-fill text-primary"/> Criado em: <span className="text-dark fw-bold">{converter(objeto.creationDate)}</span></li>
-                                    <li className="list-group-item text-muted sm-text"><i className="bi bi-calendar-check-fill text-success"/> Conclusão: <span className="text-dark fw-bold">{converter(objeto.endDate)}</span></li>
+                                    <li className="list-group-item text-muted sm-text border-light">
+                                        <i className="bi bi-calendar-plus-fill text-primary"/> Criado em: <span className="text-dark fw-bold">{converter(objeto.creationDate)}</span>
+                                    </li>
+                                    <li className="list-group-item text-muted sm-text">
+                                        <i className="bi bi-calendar-check-fill text-success"/> Conclusão: <span className="text-dark fw-bold">{converter(objeto.endDate)}</span>
+                                    </li>
                                 </ul>
 
                                 {admin &&
@@ -76,6 +93,15 @@ const Cards = ({admin}) => {
 function converter(dataString) {
     let data = new Date(dataString);
     return data.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+}
+
+function isLate(dataString) {
+    let data = new Date(dataString);
+    data.setTime(data.getTime() + (3*60*60*1000));
+    let today = new Date();
+    today.setHours(0,0,0,0);
+
+    return data < today;
 }
 
 export default Cards;

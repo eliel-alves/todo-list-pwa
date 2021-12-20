@@ -10,9 +10,20 @@ function Task({admin}) {
         ? JSON.parse(localStorage.getItem('TODOLIST-PWA/listaObjetos')) : []
     );
 
-    const [alerta, setAlerta] = useState( {status : "", message: ""});
+    const [alerta, setAlerta] = useState( {
+        status : '',
+        message: ''
+    });
 
-    const [objeto, setObjeto] = useState({id: 0, title: '', description: '', priority: '', class: '', creationDate: '', endDate: ''});
+    const [objeto, setObjeto] = useState({
+        id: 0,
+        title: '',
+        description: '',
+        priority: '',
+        class: '',
+        creationDate: '',
+        endDate: ''
+    });
 
     const [editar, setEditar] = useState(false);
 
@@ -24,12 +35,12 @@ function Task({admin}) {
             const index = listaObjetos.findIndex(p => p.id === objeto.id);
 
             // configurando classe do bagde do Card
-            if(objeto.priority === "Alta") {
-                objeto.class = "danger";
-            } else if(objeto.priority === "Baixa") {
-                objeto.class = "success";
+            if(objeto.priority === 'Alta') {
+                objeto.class = 'danger';
+            } else if(objeto.priority === 'Baixa') {
+                objeto.class = 'success';
             } else {
-                objeto.class = "primary";
+                objeto.class = 'primary';
             }
 
             // recortando lista sem o obj que está sendo editado
@@ -58,16 +69,16 @@ function Task({admin}) {
                 objeto.creationDate = (dataHoje.getFullYear() + "-" + ((dataHoje.getMonth() + 1)) + "-" + (dataHoje.getDate()));
 
                 // configurando classe do bagde do Card
-                if(objeto.priority === "Alta") {
-                    objeto.class = "danger";
-                } else if(objeto.priority === "Baixa") {
-                    objeto.class = "success";
+                if(objeto.priority === 'Alta') {
+                    objeto.class = 'danger';
+                } else if(objeto.priority === 'Baixa') {
+                    objeto.class = 'success';
                 } else {
-                    objeto.class = "primary";
+                    objeto.class = 'primary';
                 }
 
                 setListaObjetos([...listaObjetos, objeto]);
-                setAlerta({status: 'success', message: `Tarefa "${objeto.title}" adicionada com sucesso!`})
+                setAlerta({status: 'success', message: `Tarefa '${objeto.title}' adicionada com sucesso!`})
             }
         }
     }
@@ -83,7 +94,7 @@ function Task({admin}) {
         if (window.confirm('Deseja concluir essa tarefa?')) {
             const listaObjetosTemp = listaObjetos.filter(p => p.id !== objeto.id);
             setListaObjetos(listaObjetosTemp);
-            setAlerta({status: 'success', message: `Tarefa "${objeto.title}" concluída com sucesso!`});
+            setAlerta({status: 'success', message: `Tarefa '${objeto.title}' concluída com sucesso!`});
         }
     }
 
