@@ -61,7 +61,7 @@ function Form() {
 
                         <div className="modal-footer bg-light">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" className="btn btn-primary">Salvar <i className="bi bi-save" data-bs-dismiss="modal"/></button>
+                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Salvar <i className="bi bi-save" data-bs-dismiss="modal"/></button>
                         </div>
                     </form>
                 </div>
